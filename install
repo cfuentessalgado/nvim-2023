@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+
+directories=`ls -d */`
+
+folders=$( echo $directories |  sed "s/\// /g" )
+
+for folder in $folders
+do
+    stow -D $folder --target=$HOME
+    stow $folder --target=$HOME
+done
