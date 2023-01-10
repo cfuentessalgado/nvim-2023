@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+selected=`git branch -a | fzf`
+branch=$(echo "$selected" | cut -d '/' -f 3)
+
+echo "You selected the $branch branch"
+
+git checkout $branch
