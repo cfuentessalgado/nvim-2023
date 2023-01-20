@@ -1,0 +1,19 @@
+- name: Install System Packages 2
+  become: true
+  apt:
+    name: ["cmake", "pkg-config", "libfreetype6-dev", "libfontconfig1-dev", "libxcb-xfixes0-dev", "libxkbcommon-dev", "python3"]
+  tags:
+    - install
+    - alacritty
+- name: Clone Alacritty
+  ansible.builtin.git:
+    repo: 'https://github.com/alacritty/alacritty.git'
+    dest: "{{ lookup('env', 'HOME') }}/alacritty"
+  tags:
+    - install
+    - alacritty
+- name: Build alacritty
+  shell: "cd {{ lookup('env', 'HOME') }}/alacritty && {{ lookup('env', 'HOME') }}/.cargo/bin/cargo build --release"
+  tags:
+    - install
+    - alacritty
